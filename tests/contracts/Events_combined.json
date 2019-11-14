@@ -1,0 +1,17 @@
+{
+  "contracts" : 
+  {
+    "Events.sol:Events" : 
+    {
+      "abi" : "[{\"constant\":false,\"inputs\":[{\"name\":\"a\",\"type\":\"address\"}],\"name\":\"name\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"a\",\"type\":\"uint256\"},{\"name\":\"b\",\"type\":\"uint256\"},{\"name\":\"c\",\"type\":\"uint256\"}],\"name\":\"emit_interesting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"a\",\"type\":\"address\"}],\"name\":\"Name\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"a\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"b\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"c\",\"type\":\"uint256\"}],\"name\":\"Interesting\",\"type\":\"event\"}]",
+      "bin" : "608060405234801561001057600080fd5b506040805163deadbeef815290519081900360200190a0610175806100366000396000f3fe608060405234801561001057600080fd5b5060043610610052577c01000000000000000000000000000000000000000000000000000000006000350463019848928114610057578063789ab20b1461008c575b600080fd5b61008a6004803603602081101561006d57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff166100b5565b005b61008a600480360360608110156100a257600080fd5b5080359060208101359060400135610101565b6040805173ffffffffffffffffffffffffffffffffffffffff8316815290517f3042fbbf8fb97fb253117bdf7c2385c241b9eaf856a585675ce0521e592ca7a59181900360200190a150565b6040805183815260208101839052815185927ffb1ce3763357ebcb5adbc480c1ddc23334bd4f9811f298c0640648b9b9e5642c928290030190a250505056fea265627a7a723058202bece3b8548aa8795ba7400b809dcd0ee1c5010c61d6aa6179c4d02150a6772c64736f6c634300050a0032",
+      "bin-runtime" : "608060405234801561001057600080fd5b5060043610610052577c01000000000000000000000000000000000000000000000000000000006000350463019848928114610057578063789ab20b1461008c575b600080fd5b61008a6004803603602081101561006d57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff166100b5565b005b61008a600480360360608110156100a257600080fd5b5080359060208101359060400135610101565b6040805173ffffffffffffffffffffffffffffffffffffffff8316815290517f3042fbbf8fb97fb253117bdf7c2385c241b9eaf856a585675ce0521e592ca7a59181900360200190a150565b6040805183815260208101839052815185927ffb1ce3763357ebcb5adbc480c1ddc23334bd4f9811f298c0640648b9b9e5642c928290030190a250505056fea265627a7a723058202bece3b8548aa8795ba7400b809dcd0ee1c5010c61d6aa6179c4d02150a6772c64736f6c634300050a0032",
+      "hashes" : 
+      {
+        "emit_interesting(uint256,uint256,uint256)" : "789ab20b",
+        "name(address)" : "01984892"
+      }
+    }
+  },
+  "version" : "0.5.10+commit.5a6ea5b1.Linux.g++"
+}

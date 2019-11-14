@@ -1,0 +1,6 @@
+[submodule "CCF"]
+	path = CCF
+	url = https://github.com/Microsoft/CCF.git
+[submodule "eEVM"]
+	path = eEVM
+	url = https://github.com/Microsoft/eEVM.git

@@ -1,53 +1,67 @@
----
-page_type: sample
-languages:
-- csharp
-products:
-- dotnet
-description: "Add 150 character max description"
-urlFragment: "update-this-to-unique-url-stub"
----
+# EVM for CCF
 
-# Official Microsoft Sample
+This repository contains a sample application for the Confidential Consortium Framework ([CCF](https://github.com/Microsoft/CCF)) running an Ethereum Virtual Machine ([EVM](https://github.com/Microsoft/eEVM/)). This demonstrates how to build CCF from an external project, while also showcasing CCF's deterministic commits, dynamic confidentiality, and high performance.
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
-
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
-
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
-
-Give a short description for your sample here. What does it do and why is it important?
+The app exposes API endpoints based on the [Ethereum JSON RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) specification (eg - `eth_sendRawTransaction`, `eth_getTransactionReceipt`), so some standard Ethereum tooling can be reused by merely modifying the transport layer to communicate with CCF.
 
 ## Contents
 
-Outline the file contents of the repository. It helps users navigate the codebase, build configuration and any related assets.
-
 | File/folder       | Description                                |
 |-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
-| `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
-| `README.md`       | This README file.                          |
-| `LICENSE`         | The license for the sample.                |
+| `src`             | Source code for the EVM4CCF app            |
+| `tests`           | Unit tests for the app's key functionality |
+| `samples`         | End-to-end tests, driving an EVM4CCF instance with standard web3.py tools|
 
 ## Prerequisites
 
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
+This sample requires an SGX-enabled VM with CCF's dependencies. Installation of these requirements is described in [CCF's documentation](https://microsoft.github.io/CCF/quickstart/requirements.html#environment-setup).
 
 ## Setup
 
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
+```
+git clone --recurse-submodules https://github.com/microsoft/EVM-for-CCF.git
+cd EVM-for-CCF
+mkdir build
+cd build
+cmake .. -GNinja
+ninja
+```
 
-## Runnning the sample
+## Running the sample
 
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
+To run the full test suite:
+
+```
+cd build
+./tests.sh -VV
+```
+
+To launch a local instance for manual testing:
+
+```
+cd build
+./tests.sh -N
+source env/bin/activate
+export PYTHONPATH=../CCF/tests
+python ../CCF/tests/start_network.py -g ../CCF/src/runtime_config/gov.lua -p libevm4ccf
+
+  ...
+  Started CCF network with the following nodes:
+    Node [ 0] = 127.163.125.22:40718
+    Node [ 1] = 127.40.220.213:32917
+    Node [ 2] = 127.42.144.73:40275
+```
+
+User transactions can then be submitted as described in the [CCF documentation](https://microsoft.github.io/CCF/users/issue_commands.html), or via [web3.py](https://web3py.readthedocs.io/) with the `CCFProvider` class defined in `samples/provider.py`.
 
 ## Key concepts
 
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
+CCF is a framework for building fault-tolerant, high-performance, fully-confidential distributed services, hosting an arbitrary user-defined application. In this case the user-defined application is an interpreter for Ethereum bytecode, executing smart contracts entirely inside a [TEE](https://en.wikipedia.org/wiki/Trusted_execution_environment).
+
+This service looks in many ways like a traditional Ethereum node, but has some fundamental differences:
+- Consensus is deterministic rather than probabilistic. Since we trust the executing node, we do not need to re-execute on every node or wait for multiple block commits. There is a single transaction history, with no forks.
+- There are no local nodes. Users do not run their own node, trusting it with key access and potentially private state. Instead all nodes run inside enclaves, maintaining privacy and guaranteeing execution integrity, regardless of where those enclaves are actually hosted.
+- State is confidential, and that confidentiality is entirely controlled by smart contract logic. The app does not produce a public log of all transactions, and it does not reveal the resulting state to all users. The only access to state is by calling methods on smart contracts, where arbitrarily complex and dynamic restrictions can be applied.
 
 ## Contributing
 
