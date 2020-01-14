@@ -12,24 +12,25 @@ pr:
     include:
       - master
 
-pool:
-  name: Ubuntu-1804-DC4s
-  vmImage: ccfciteam/ccf-ci-18.04-oe-0.7.0-sgx:latest
+jobs:
+  - job: build_and_test
+    pool: Ubuntu-1804-DC4s
+    container: ccfciteam/ccf-ci-18.04-oe-0.7.0-sgx:latest
 
-steps:
-- script: mkdir build
-  displayName: 'Create build directory'
+    steps:
+    - script: mkdir build
+      displayName: 'Create build directory'
 
-- script: cmake --version
+    - script: cmake --version
 
-- script: cmake .. -GNinja
-  displayName: CMake
-  workingDirectory: build
+    - script: cmake .. -GNinja
+      displayName: CMake
+      workingDirectory: build
 
-- script: ninja
-  displayName: Build
-  workingDirectory: build
+    - script: ninja
+      displayName: Build
+      workingDirectory: build
 
-- script: ./tests.sh -VV
-  displayName: Tests
-  workingDirectory: build
+    - script: ./tests.sh -VV
+      displayName: Tests
+      workingDirectory: build
