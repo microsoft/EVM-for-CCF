@@ -1,0 +1,24 @@
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: mkdir build
+  displayName: 'Create build directory'
+
+- script: cmake .. -GNinja -DTARGET=virtual
+  displayName: CMake (virtual)
+  workingDirectory: build
+
+- script: ninja
+  displayName: Build
+  workingDirectory: build
+
+- script: ./tests.sh -VV
+  displayName: Tests
+  workingDirectory: build
+
