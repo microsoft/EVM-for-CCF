@@ -1,17 +1,27 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  batch: true
+  branches:
+    include:
+      - "master"
+
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Ubuntu-1804-DC4s
+  vmImage: ccfciteam/ccf-ci-18.04-oe-0.7.0-sgx:latest
 
 steps:
 - script: mkdir build
   displayName: 'Create build directory'
 
-- script: cmake .. -GNinja -DTARGET=virtual
-  displayName: CMake (virtual)
+- script: cmake .. -GNinja
+  displayName: CMake
   workingDirectory: build
 
 - script: ninja
@@ -21,4 +31,3 @@ steps:
 - script: ./tests.sh -VV
   displayName: Tests
   workingDirectory: build
-
