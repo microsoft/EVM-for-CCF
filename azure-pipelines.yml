@@ -20,6 +20,8 @@ steps:
 - script: mkdir build
   displayName: 'Create build directory'
 
+- script: cmake --version
+
 - script: cmake .. -GNinja
   displayName: CMake
   workingDirectory: build
