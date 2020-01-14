@@ -18,6 +18,10 @@ jobs:
     container: ccfciteam/ccf-ci-18.04-oe-0.7.0-sgx:latest
 
     steps:
+    - checkout: self
+      clean: true
+      submodules: true
+
     - script: mkdir build
       displayName: 'Create build directory'
 
