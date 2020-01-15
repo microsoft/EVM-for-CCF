@@ -25,7 +25,7 @@ jobs:
     - script: mkdir build
       displayName: 'Create build directory'
 
-    - script: cmake .. -GNinja
+    - script: cmake .. -GNinja -L
       displayName: CMake
       workingDirectory: build
 
