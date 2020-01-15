@@ -10,6 +10,7 @@ trigger:
       - '*'
     exclude:
       - '*.md'
+      - 'sphinx/*'
 
 pr:
   autoCancel: true
@@ -21,6 +22,7 @@ pr:
       - '*'
     exclude:
       - '*.md'
+      - 'sphinx/*'
 
 jobs:
   - job: build_and_test_sgx
