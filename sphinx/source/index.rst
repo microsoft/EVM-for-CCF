@@ -1,4 +1,4 @@
-CCF Ethereum Application Documentation
+EVM for CCF Documentation
 =======================================
 
 .. toctree::

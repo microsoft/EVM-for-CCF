@@ -58,7 +58,7 @@ User transactions can then be submitted as described in the [CCF documentation](
 
 ## Key concepts
 
-CCF is a framework for building fault-tolerant, high-performance, fully-confidential distributed services, hosting an arbitrary user-defined application. In this case the user-defined application is an interpreter for Ethereum bytecode, executing smart contracts entirely inside a [TEE](https://en.wikipedia.org/wiki/Trusted_execution_environment).
+CCF is a framework for building fault-tolerant, high-performance, fully-confidential distributed services, hosting a user-defined application. In this case the user-defined application is an interpreter for Ethereum bytecode, executing smart contracts entirely inside a [TEE](https://en.wikipedia.org/wiki/Trusted_execution_environment).
 
 This service looks in many ways like a traditional Ethereum node, but has some fundamental differences:
 - Consensus is deterministic rather than probabilistic. Since we trust the executing node, we do not need to re-execute on every node or wait for multiple block commits. There is a single transaction history, with no forks.

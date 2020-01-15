@@ -1,9 +1,7 @@
 RPC Interface
 =============
 
-Where RPC methods have the same name as `Ethereum JSON RPC`_ the app will accept requests in the same format. Where the request params are an array the app will also accept an object giving names to the arguments.
-
-Any `default block parameters <https://github.com/ethereum/wiki/wiki/JSON-RPC#the-default-block-parameter>`_ must be 'latest' - the app only has access to the current state/block.
+Where RPC methods have the same name as `Ethereum JSON RPC`_ the app will accept requests in the same format and return compatible responses. Any `default block parameters <https://github.com/ethereum/wiki/wiki/JSON-RPC#the-default-block-parameter>`_ must be ``"latest"`` as the app only has access to the current state.
 
 For example, to retrieve an account's code:
 
@@ -19,20 +17,6 @@ For example, to retrieve an account's code:
                 "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
                 "latest"
             ]
-        }
-
-    or
-
-    .. code-block:: json
-
-        {
-            "id":1,
-            "jsonrpc": "2.0",
-            "method": "eth_getCode",
-            "params": {
-                "address": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-                "block_id": "latest"
-            }
         }
 
 - Response
@@ -52,136 +36,18 @@ Ethereum addresses, 32-byte numbers and byte strings should be presented hex-enc
 Supported RPCs
 --------------
 
-.. raw:: html
+The following RPCs are currently supported:
 
-    <style> .no {color:crimson} </style>
+* ``eth_call``
+* ``eth_getBalance``
+* ``eth_getCode``
+* ``eth_getTransactionCount``
+* ``eth_getTransactionReceipt``
+* ``eth_sendTransaction``
+* ``eth_sendRawTransaction``
 
-.. raw:: html
+Many RPCs are not supported as they break the privacy model. For instance ``eth_getStorageAt`` should not be implemented, as it allows users to read arbitrary state from EVM storage. We want all such access to go through bytecode execution (ie - to call a method on a contract, with potential access controls), so this RPC is not implemented.
 
-    <style> .todo {color:darkorange} </style>
-
-.. raw:: html
-
-    <style> .partial {color:yellowgreen} </style>
-
-.. raw:: html
-
-    <style> .yes {color:forestgreen} </style>
-
-.. role:: no
-.. role:: todo
-.. role:: partial
-.. role:: yes
-
-Standard RPCs
-`````````````
-
-The following table lists all RPCs from `Ethereum JSON RPC`_ and indicates whether they are :yes:`✔ fully supported`, :no:`✖ unsupported/inapplicable`, :partial:`! partially supported`, or :todo:`? may be implemented in the future`.
-
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| Method                                              | Notes                                                                                  | 
-+=====================================================+========================================================================================+ 
-| :no:`✖` web3_*                                      |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` net_*                                       |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_protocolVersion                         | Unclear where these version IDs are defined                                            |
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_syncing                                |                                                                                         |
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :todo:`?` eth_coinbase                              | [identity]_                                                                            | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_mining                                  |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_hashrate                                |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_gasPrice                                |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :partial:`!` eth_accounts                           | Current response is out-of-date [identity]_                                            | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :todo:`?` eth_blockNumber                           | Should return number of latest block notification received from public chain           | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :yes:`✔` eth_getBalance                             | [confidentiality]_                                                                     | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :yes:`✔` eth_getStorageAt                           | [confidentiality]_                                                                     | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :yes:`✔` eth_getTransactionCount                    |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getBlockTransactionCountBy*             | [public_state]_                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getUncleCountByBlock*                   | [public_state]_                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :yes:`✔` eth_getCode                                | [confidentiality]_                                                                     | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_sign                                    |                                                                                        |
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :yes:`✔` eth_sendTransaction                        | Nonce is ignored - EVM4CCF does not support overwriting pending transactions           | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :todo:`?` eth_sendRawTransaction                    | Required - for proxy-forwarding, only raw (signed) transactions can be authenticated   | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :yes:`✔` eth_call                                   | [confidentiality]_                                                                     | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_estimateGas                             |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getBlockBy*                             | [public_state]_                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getTransactionBy*                       | [public_state]_                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :yes:`✔` eth_getTransactionReceipt                  | Most fields of the receipt are unfilled, default to 0                                  | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_pendingTransactions                     |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getTransactionBy*                       | [public_state]_                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getCompilers                            |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_compile*                                |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_newFilter                               | [event_logs]_                                                                          | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_newBlockFilter                          | [event_logs]_                                                                          | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_newPendingTransactionFilter             | [event_logs]_                                                                          | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_uninstallFilter                         | [event_logs]_                                                                          | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getFilterChanges                        | [event_logs]_                                                                          | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getFilterLogs                           | [event_logs]_                                                                          | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getLogs                                 | [event_logs]_                                                                          | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getWork                                 |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_submitWork                              |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_submitHashrate                          |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` eth_getProof                                |                                                                                        | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` db_*                                        | EVM4CCF does not have a local database                                                 | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| :no:`✖` shh_*                                       | EVM4CCF does not support whisper protocol                                              | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-
-.. [identity] In the current design EVM4CCF will generate an Ethereum identity at runtime. This is similar to the client address in other Ethereum apps, so could be returned from these existing RPCs
-.. [public_state] Information about blocks is already available on the public chain. Accessors are not duplicated in EVM4CCF
-.. [confidentiality] General state accessors are useful for debugging but can reveal state from private transactions. These may be removed or disabled for production services
-.. [event_logs] To avoid rapid, unconstrained memory growth inside the enclave, EVM4CCF does not currently produce event logs. Providing managed or off-ledger access to these is an open issue
-
-Debug RPCs
-``````````
-
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| Method                                              | Notes                                                                                  | 
-+=====================================================+========================================================================================+ 
-| dbg_create                                          | Creates account with specified ether, code, and storage                                | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| dbg_disassemble                                     | Returns disassembly of EVM bytecode                                                    | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| dbg_store                                           | Places a value directly into the EVM's permanent storage                               | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
-| dbg_transfer                                        | Transfers ether between accounts                                                       | 
-+-----------------------------------------------------+----------------------------------------------------------------------------------------+ 
+Others do not match the execution model more generally. The service is responsible solely for execution, it is not a node owning a specific user identity, so ``eth_accounts`` does not make sense. All RPCs which request block state, events, or gas costs are similarly inapplicable and not implemented.
 
 .. _`Ethereum JSON RPC`: https://github.com/ethereum/wiki/wiki/JSON-RPC
