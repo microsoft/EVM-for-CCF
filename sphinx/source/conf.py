@@ -47,7 +47,11 @@ extensions = [
     "breathe",
     "sphinxcontrib.mermaid",
     "sphinx.ext.autosectionlabel",
+    "sphinx.ext.githubpages",
+    "sphinx-jsonschema",
 ]
+
+autosectionlabel_prefix_document = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -137,7 +141,7 @@ latex_documents = [
         master_doc,
         "EVM4CCF.tex",
         u"EVM for CCF Documentation",
-        u"Microsoft Research",
+        author,
         "manual",
     )
 ]
@@ -182,3 +186,11 @@ todo_include_todos = True
 # Setup the breathe extension
 breathe_projects = {"EVM-for-CCF": "../../doxygen/xml"}
 breathe_default_project = "EVM-for-CCF"
+
+html_context = {
+    "source_url_prefix": "https://github.com/Microsoft/EVM-for-CCF",
+    "display_github": True,
+    "github_user": "Microsoft",
+    "github_repo": "EVM-for-CCF",
+    "github_version": "master/sphinx/source/",
+}
