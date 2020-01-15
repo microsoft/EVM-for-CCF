@@ -1,4 +1,5 @@
 [![Build Status](https://dev.azure.com/MSRC-CCF/CCF/_apis/build/status/EVM-for-CCF%20GitHub%20CI?branchName=master)](https://dev.azure.com/MSRC-CCF/CCF/_build/latest?definitionId=5&branchName=master)
+[![Documentation](https://dev.azure.com/MSRC-CCF/CCF/_apis/build/status/CCF%20GitHub%20Pages?branchName=master)](https://microsoft.github.io/CCF/)
 
 # EVM for CCF
 
