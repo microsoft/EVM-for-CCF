@@ -34,7 +34,7 @@ jobs:
 
     - task: DownloadSecureFile@1
       inputs:
-        secureFile: ccf
+        secureFile: evm4ccf_ghpages
       displayName: 'Get the deploy key'
 
     - script: |
