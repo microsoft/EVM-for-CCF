@@ -15,8 +15,9 @@ pr:
 jobs:
   - job: Build and Test SGX
     pool: Ubuntu-1804-DC4s
-    container: ccfciteam/ccf-ci-18.04-oe-0.7.0-sgx:latest
-    options: --publish-all --device /dev/sgx:/dev/sgx
+    container:
+      image: ccfciteam/ccf-ci-18.04-oe-0.7.0-sgx:latest
+      options: --publish-all --device /dev/sgx:/dev/sgx
 
     steps:
     - checkout: self
