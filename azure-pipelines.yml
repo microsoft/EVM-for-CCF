@@ -5,12 +5,22 @@ trigger:
   branches:
     include:
       - "master"
+  paths:
+    include:
+      - '*'
+    exclude:
+      - '*.md'
 
 pr:
   autoCancel: true
   branches:
     include:
       - master
+  paths:
+    include:
+      - '*'
+    exclude:
+      - '*.md'
 
 jobs:
   - job: build_and_test_sgx
