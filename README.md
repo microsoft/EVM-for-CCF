@@ -2,7 +2,7 @@
 |- |- |
 | Community Chat | [![Gitter](https://badges.gitter.im/MSRC-CCF/EVM-for-CCF.svg)](https://gitter.im/MSRC-CCF/EVM-for-CCF?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) |
 | Continuous Integration | [![Build Status](https://dev.azure.com/MSRC-CCF/CCF/_apis/build/status/EVM-for-CCF%20GitHub%20CI?branchName=master)](https://dev.azure.com/MSRC-CCF/CCF/_build/latest?definitionId=5&branchName=master) |
-| Documentation | [![Documentation](https://dev.azure.com/MSRC-CCF/CCF/_apis/build/status/CCF%20GitHub%20Pages?branchName=master)](https://microsoft.github.io/EVM-for-CCF/) |
+| Documentation | [![Documentation](https://dev.azure.com/MSRC-CCF/CCF/_apis/build/status/CCF%20GitHub%20Pages?branchName=master)](https://microsoft.github.io/EVM-for-CCF/introduction.html) |
 
 # EVM for CCF
 

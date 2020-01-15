@@ -4,7 +4,7 @@ Introduction
 Overview
 --------
 
-EVM for CCF is a sample CCF application. It runs EVM bytecode transactions through `Enclave EVM (eEVM) <https://github.com/Microsoft/eEVM/>`_, with all permanent state backed by CCF's replicated, fault-tolerant :cpp:class:`kv::Store`. Since transactions are executed inside the enclave this can provide confidential, attestable execution of EVM bytecode and smart contracts at significantly higher throughputs (and lower latencies) than most Ethereum networks.
+`EVM for CCF`_ is a sample application for the `Confidential Consortium Framework (CCF) <https://github.com/Microsoft/CCF>`_. It runs EVM bytecode transactions through `Enclave EVM (eEVM) <https://github.com/Microsoft/eEVM/>`_, with all permanent state backed by CCF's replicated, fault-tolerant :cpp:class:`kv::Store`. Since transactions are executed inside the enclave this can provide confidential, attestable execution of EVM bytecode and smart contracts at significantly higher throughputs (and lower latencies) than most Ethereum networks.
 
 An EVM for CCF service is a distributed network of TEEs running this sample application. This service can look like a standard Ethereum service, exposing the same API methods based on the `Ethereum JSON RPC <https://github.com/ethereum/wiki/wiki/JSON-RPC>`_ specification, but it has several crucial differences:
 
@@ -35,3 +35,5 @@ Some of the tests spin up a CCF network using the Python infrastructure from the
 The ``tests.sh`` creates a temporary Python environment and installs these dependencies before running the tests.
 
 This project is not currently tested on wide variety of platforms. We develop on Ubuntu18.04 with Python3.7, compiling with Clang8 - there may be compatibility problems with other versions.
+
+.. _`EVM for CCF`: https://github.com/microsoft/EVM-for-CCF

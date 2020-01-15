@@ -21,7 +21,7 @@
 # -- Project information -----------------------------------------------------
 
 project = u"EVM-for-CCF"
-copyright = u"2018, Microsoft Research"
+copyright = u"Microsoft Corporation"
 author = u"Microsoft Research"
 
 # The short X.Y version
