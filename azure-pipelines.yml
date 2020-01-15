@@ -1,24 +1,76 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  batch: true
+  branches:
+    include:
+      - "master"
+  paths:
+    include:
+      - '*'
+    exclude:
+      - '*.md'
 
-pool:
-  vmImage: 'ubuntu-latest'
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - '*'
+    exclude:
+      - '*.md'
 
-steps:
-- script: mkdir build
-  displayName: 'Create build directory'
+jobs:
+  - job: build_and_test_sgx
+    displayName: Build and Test SGX
+    pool: Ubuntu-1804-DC4s
+    container:
+      image: ccfciteam/ccf-ci-18.04-oe-0.7.0-sgx:latest
+      options: --publish-all --device /dev/sgx:/dev/sgx
 
-- script: cmake .. -GNinja -DTARGET=virtual
-  displayName: CMake (virtual)
-  workingDirectory: build
+    steps:
+    - checkout: self
+      clean: true
+      submodules: true
 
-- script: ninja
-  displayName: Build
-  workingDirectory: build
+    - script: mkdir build
+      displayName: 'Create build directory'
 
-- script: ./tests.sh -VV
-  displayName: Tests
-  workingDirectory: build
+    - script: cmake .. -GNinja -L
+      displayName: CMake
+      workingDirectory: build
 
+    - script: ninja
+      displayName: Build
+      workingDirectory: build
+
+    - script: ./tests.sh -VV
+      displayName: Tests
+      workingDirectory: build
+
+  - job: build_and_test_nosgx
+    displayName: Build and Test NoSGX
+    pool: Ubuntu-1804-D8s_v3
+    container: ccfciteam/ccf-ci-18.04-oe-0.7.0-sgx:latest
+
+    steps:
+    - checkout: self
+      clean: true
+      submodules: true
+
+    - script: mkdir build
+      displayName: 'Create build directory'
+
+    - script: cmake .. -GNinja -DTARGET=virtual -L
+      displayName: CMake (virtual)
+      workingDirectory: build
+
+    - script: ninja
+      displayName: Build
+      workingDirectory: build
+
+    - script: ./tests.sh -VV
+      displayName: Tests
+      workingDirectory: build
