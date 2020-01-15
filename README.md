@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/MSRC-CCF/CCF/_apis/build/status/EVM-for-CCF%20GitHub%20CI?branchName=master)](https://dev.azure.com/MSRC-CCF/CCF/_build/latest?definitionId=5&branchName=master)
+
 # EVM for CCF
 
 This repository contains a sample application for the Confidential Consortium Framework ([CCF](https://github.com/Microsoft/CCF)) running an Ethereum Virtual Machine ([EVM](https://github.com/Microsoft/eEVM/)). This demonstrates how to build CCF from an external project, while also showcasing CCF's deterministic commits, dynamic confidentiality, and high performance.
