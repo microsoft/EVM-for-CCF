@@ -22,6 +22,7 @@ target_link_libraries(memberclient PRIVATE
   ${CMAKE_THREAD_LIBS_INIT}
   ccfcrypto.host
   secp256k1.host
+  http_parser.host
 )
 
 add_subdirectory(${EVM_DIR}/3rdparty)
