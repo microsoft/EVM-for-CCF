@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Implementation &mdash; EVM-for-CCF  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RPC Interface" href="rpcinterface.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EVM-for-CCF
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interface-between-evm-execution-and-kv-storage">Interface between EVM execution and KV-storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rpcinterface.html">RPC Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EVM-for-CCF</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Implementation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Microsoft/EVM-for-CCF/blob/master/sphinx/source/implementation.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="implementation">
+<h1>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h1>
+<p>The basic structure of a CCF app can be seen in the <a class="reference external" href="https://microsoft.github.io/CCF/developers/logging_cpp.html">example logging app</a> in the CCF repo. This app implements <a class="reference internal" href="api.html#_CPPv4N6ccfapp15get_rpc_handlerERN3ccf13NetworkTablesERN3ccf16AbstractNotifierE" title="ccfapp::get_rpc_handler"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ccfapp::get_rpc_handler()</span></code></a> in a similar way:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">enclave</span><span class="o">::</span><span class="n">RpcHandler</span><span class="o">&gt;</span> <span class="n">get_rpc_handler</span><span class="p">(</span>
+  <span class="n">ccf</span><span class="o">::</span><span class="n">NetworkTables</span><span class="o">&amp;</span> <span class="n">nwt</span><span class="p">,</span> <span class="n">ccf</span><span class="o">::</span><span class="n">AbstractNotifier</span><span class="o">&amp;</span> <span class="n">notifier</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">evm4ccf</span><span class="o">::</span><span class="n">EVMForCCFFrontend</span><span class="o">&gt;</span><span class="p">(</span><span class="n">nwt</span><span class="p">,</span> <span class="n">notifier</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Multiple tables are created in CCF’s <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">kv::Store</span></code>:</p>
+<ul class="simple">
+<li><p>maps from ethereum addresses to each piece of account state (ether balance, executable code, transaction nonce)</p></li>
+<li><p>a map for all the EVM-accessible per-account storage (keyed by a concatenation of the account address and storage key)</p></li>
+<li><p>a map from transaction hashes to their results, sufficient for producing minimal transaction receipts</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>  <span class="n">EVMForCCFFrontend</span><span class="p">(</span><span class="n">NetworkTables</span><span class="o">&amp;</span> <span class="n">nwt</span><span class="p">,</span> <span class="n">AbstractNotifier</span><span class="o">&amp;</span> <span class="n">notifier</span><span class="p">)</span> <span class="o">:</span>
+    <span class="n">UserRpcFrontend</span><span class="p">(</span><span class="o">*</span><span class="n">nwt</span><span class="p">.</span><span class="n">tables</span><span class="p">),</span>
+    <span class="n">accounts</span><span class="p">{</span><span class="n">tables</span><span class="p">.</span><span class="n">create</span><span class="o">&lt;</span><span class="n">tables</span><span class="o">::</span><span class="n">Accounts</span><span class="o">::</span><span class="n">Balances</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;eth.account.balance&quot;</span><span class="p">),</span>
+             <span class="n">tables</span><span class="p">.</span><span class="n">create</span><span class="o">&lt;</span><span class="n">tables</span><span class="o">::</span><span class="n">Accounts</span><span class="o">::</span><span class="n">Codes</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;eth.account.code&quot;</span><span class="p">),</span>
+             <span class="n">tables</span><span class="p">.</span><span class="n">create</span><span class="o">&lt;</span><span class="n">tables</span><span class="o">::</span><span class="n">Accounts</span><span class="o">::</span><span class="n">Nonces</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;eth.account.nonce&quot;</span><span class="p">)},</span>
+    <span class="n">storage</span><span class="p">(</span><span class="n">tables</span><span class="p">.</span><span class="n">create</span><span class="o">&lt;</span><span class="n">tables</span><span class="o">::</span><span class="n">Storage</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;eth.storage&quot;</span><span class="p">)),</span>
+    <span class="n">tx_results</span><span class="p">(</span><span class="n">tables</span><span class="p">.</span><span class="n">create</span><span class="o">&lt;</span><span class="n">tables</span><span class="o">::</span><span class="n">Results</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;eth.txresults&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="section" id="interface-between-evm-execution-and-kv-storage">
+<h2>Interface between EVM execution and KV-storage<a class="headerlink" href="#interface-between-evm-execution-and-kv-storage" title="Permalink to this headline">¶</a></h2>
+<p>The constructor installs handlers for each supported RPC method. The body of each these handlers constructs an instance of <a class="reference internal" href="api.html#_CPPv4N7evm4ccf13EthereumStateE" title="evm4ccf::EthereumState"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">evm4ccf::EthereumState</span></code></a> with <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">kv::Map::TxViews</span></code> over the required tables. This is an implementation of the abstract <a class="reference internal" href="api.html#_CPPv4N4eevm11GlobalStateE" title="eevm::GlobalState"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">eevm::GlobalState</span></code></a> which reads and writes from those :cpp:class`TxViews`, backed by CCF’s <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">kv::Store</span></code>.</p>
+<p>Where the transaction results in the execution of EVM bytecode (ie - <cite>eth_sendTransaction</cite>, <cite>eth_call</cite>), the handler passes this <a class="reference internal" href="api.html#_CPPv4N7evm4ccf13EthereumStateE" title="evm4ccf::EthereumState"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">evm4ccf::EthereumState</span></code></a> to <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">evm4ccf::EthereumFrontend::run_in_evm()</span></code> which in turn calls <a class="reference internal" href="api.html#_CPPv4N4eevm9Processor3runER11TransactionRK7Address12AccountStateRKNSt6vectorI7uint8_tEERK9uint256_tP5Trace" title="eevm::Processor::run"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">eevm::Processor::run()</span></code></a>. Any <code class="docutils literal notranslate"><span class="pre">SSTORE</span></code> opcodes in the executed bytecode will then result in writes to the EthereumState’s <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">kv::Map::TxView</span></code> :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>  <span class="kt">void</span> <span class="nf">store</span><span class="p">(</span><span class="k">const</span> <span class="n">uint256_t</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint256_t</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="k">override</span>
+  <span class="p">{</span>
+    <span class="n">storage</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">translate</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+<p>This adds to the CCF-transaction’s write set, updating an element in the <code class="docutils literal notranslate"><span class="pre">Storage</span></code> table to the provided value. If this transaction is successfully committed, that write set and corresponding storage update will be replicated across all CCF nodes.</p>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>eEVM does not track gas. Gas is not spent during computation, and out-of-gas exceptions will not occur.</p></li>
+<li><p>eEVM does not support post-Homestead opcodes or precompiled contracts. When compiling to EVM bytecode, be sure to specify the target EVM version.</p></li>
+<li><p>Previous block state is inaccessible. EVM bytecode can access blockchain state directly through opcodes like <code class="docutils literal notranslate"><span class="pre">BLOCKHASH</span></code>, <code class="docutils literal notranslate"><span class="pre">NUMBER</span></code>, <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code>. These will return placeholders in EVM for CCF, since there is no historical storage to read from.</p></li>
+<li><p>While <code class="docutils literal notranslate"><span class="pre">eth_getTransactionReceipt</span></code> is implemented, and can be used to retrieve the address of deployed contracts, many of the receipt fields are not applicable to EVM for CCF and are left empty.</p></li>
+<li><p>Event logs are not stored. These could be stored in the KV as well, with some decisions made regarding their intended privacy level. But we believe it is simpler for contracts to store all of their effects in contract state, rather than reporting some through a side channel. Since execution and storage are much cheaper than in a proof-of-work blockchain, this side channel is unnecessary.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rpcinterface.html" class="btn btn-neutral float-right" title="RPC Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Microsoft Corporation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

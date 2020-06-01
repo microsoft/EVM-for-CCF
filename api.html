@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API &mdash; EVM-for-CCF  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Demos" href="demos.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EVM-for-CCF
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rpcinterface.html">RPC Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#application-entry-point">Application Entry Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rpcs">RPCs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#eevm">eEVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ethereum-app">Ethereum App</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EVM-for-CCF</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Microsoft/EVM-for-CCF/blob/master/sphinx/source/api.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="application-entry-point">
+<h2>Application Entry Point<a class="headerlink" href="#application-entry-point" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N6ccfapp15get_rpc_handlerERN3ccf13NetworkTablesERN3ccf16AbstractNotifierE">
+<span id="_CPPv3N6ccfapp15get_rpc_handlerERN3ccf13NetworkTablesERN3ccf16AbstractNotifierE"></span><span id="_CPPv2N6ccfapp15get_rpc_handlerERN3ccf13NetworkTablesERN3ccf16AbstractNotifierE"></span><span id="ccfapp::get_rpc_handler__ccf::NetworkTablesR.ccf::AbstractNotifierR"></span><span class="target" id="evm__for__ccf_8cpp_1aed3cdd5741a4e0957943b7ca3a3b2f75"></span>std::shared_ptr&lt;enclave::RpcHandler&gt; <code class="sig-prename descclassname">ccfapp<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">get_rpc_handler</code><span class="sig-paren">(</span>ccf::NetworkTables &amp;<em>nwt</em>, ccf::AbstractNotifier &amp;<em>notifier</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6ccfapp15get_rpc_handlerERN3ccf13NetworkTablesERN3ccf16AbstractNotifierE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="rpcs">
+<h2>RPCs<a class="headerlink" href="#rpcs" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="rpcinterface.html#rpc-list"><span class="std std-ref">Supported RPCs</span></a></p>
+</div>
+<div class="section" id="eevm">
+<h2>eEVM<a class="headerlink" href="#eevm" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp struct">
+<dt id="_CPPv4N4eevm7AccountE">
+<span id="_CPPv3N4eevm7AccountE"></span><span id="_CPPv2N4eevm7AccountE"></span><span id="eevm::Account"></span><span class="target" id="structeevm_1_1Account"></span><em class="property">struct </em><code class="sig-prename descclassname">eevm<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">Account</code><a class="headerlink" href="#_CPPv4N4eevm7AccountE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Abstract interface for interacting with EVM accounts </p>
+<p>Subclassed by eevm::SimpleAccount, evm4ccf::AccountProxy</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="cpp type">
+<dt id="_CPPv4N4eevm7Account5NonceE">
+<span id="_CPPv3N4eevm7Account5NonceE"></span><span id="_CPPv2N4eevm7Account5NonceE"></span><span class="target" id="structeevm_1_1Account_1a2ed447133f42e6363509c929fee9759f"></span><em class="property">using </em><code class="sig-name descname">Nonce</code> = size_t<a class="headerlink" href="#_CPPv4N4eevm7Account5NonceE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm7AccountD0Ev">
+<span id="_CPPv3N4eevm7AccountD0Ev"></span><span id="_CPPv2N4eevm7AccountD0Ev"></span><span id="eevm::Account::~Account"></span><span class="target" id="structeevm_1_1Account_1a05f4db0ea54e2427ca8a471499aba6c6"></span><code class="sig-name descname">~Account</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4eevm7AccountD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK4eevm7Account11get_addressEv">
+<span id="_CPPv3NK4eevm7Account11get_addressEv"></span><span id="_CPPv2NK4eevm7Account11get_addressEv"></span><span id="eevm::Account::get_addressC"></span><span class="target" id="structeevm_1_1Account_1a4bdfb98f07dc1e04c2f421ec45bbf1db"></span>Address <code class="sig-name descname">get_address</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK4eevm7Account11get_addressEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK4eevm7Account11get_balanceEv">
+<span id="_CPPv3NK4eevm7Account11get_balanceEv"></span><span id="_CPPv2NK4eevm7Account11get_balanceEv"></span><span id="eevm::Account::get_balanceC"></span><span class="target" id="structeevm_1_1Account_1a10b28496a2a7c512a30b8cde4af7d27a"></span>uint256_t <code class="sig-name descname">get_balance</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK4eevm7Account11get_balanceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm7Account11set_balanceERK9uint256_t">
+<span id="_CPPv3N4eevm7Account11set_balanceERK9uint256_t"></span><span id="_CPPv2N4eevm7Account11set_balanceERK9uint256_t"></span><span id="eevm::Account::set_balance__uint256_tCR"></span><span class="target" id="structeevm_1_1Account_1af3d58dd0a60e2e20417a3e78f3c94317"></span>void <code class="sig-name descname">set_balance</code><span class="sig-paren">(</span><em class="property">const</em> uint256_t &amp;<em>b</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N4eevm7Account11set_balanceERK9uint256_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm7Account6pay_toER7AccountRK9uint256_t">
+<span id="_CPPv3N4eevm7Account6pay_toER7AccountRK9uint256_t"></span><span id="_CPPv2N4eevm7Account6pay_toER7AccountRK9uint256_t"></span><span id="eevm::Account::pay_to__AccountR.uint256_tCR"></span><span class="target" id="structeevm_1_1Account_1aae11d6f0a3d3e052598eca312cef6467"></span>void <code class="sig-name descname">pay_to</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4eevm7AccountE" title="eevm::Account">Account</a> &amp;<em>other</em>, <em class="property">const</em> uint256_t &amp;<em>amount</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4eevm7Account6pay_toER7AccountRK9uint256_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK4eevm7Account9get_nonceEv">
+<span id="_CPPv3NK4eevm7Account9get_nonceEv"></span><span id="_CPPv2NK4eevm7Account9get_nonceEv"></span><span id="eevm::Account::get_nonceC"></span><span class="target" id="structeevm_1_1Account_1a5281d5b4b17b3856c5370c917a7ef3ba"></span><a class="reference internal" href="#_CPPv4N4eevm7Account5NonceE" title="eevm::Account::Nonce">Nonce</a> <code class="sig-name descname">get_nonce</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK4eevm7Account9get_nonceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm7Account15increment_nonceEv">
+<span id="_CPPv3N4eevm7Account15increment_nonceEv"></span><span id="_CPPv2N4eevm7Account15increment_nonceEv"></span><span id="eevm::Account::increment_nonce"></span><span class="target" id="structeevm_1_1Account_1ad5a9b6f61b311afb59e4248cddbe4e79"></span>void <code class="sig-name descname">increment_nonce</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N4eevm7Account15increment_nonceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK4eevm7Account8get_codeEv">
+<span id="_CPPv3NK4eevm7Account8get_codeEv"></span><span id="_CPPv2NK4eevm7Account8get_codeEv"></span><span id="eevm::Account::get_codeC"></span><span class="target" id="structeevm_1_1Account_1a9a2de9cd3ace5ae74eb3fb3910256346"></span>Code <code class="sig-name descname">get_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK4eevm7Account8get_codeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm7Account8set_codeERR4Code">
+<span id="_CPPv3N4eevm7Account8set_codeERR4Code"></span><span id="_CPPv2N4eevm7Account8set_codeERR4Code"></span><span id="eevm::Account::set_code__CodeRR"></span><span class="target" id="structeevm_1_1Account_1a5414e0b32f4fc0ee87bfd52228126906"></span>void <code class="sig-name descname">set_code</code><span class="sig-paren">(</span>Code &amp;&amp;<em>code</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N4eevm7Account8set_codeERR4Code" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm7Account8has_codeEv">
+<span id="_CPPv3N4eevm7Account8has_codeEv"></span><span id="_CPPv2N4eevm7Account8has_codeEv"></span><span id="eevm::Account::has_code"></span><span class="target" id="structeevm_1_1Account_1a8f7b81dd615b2cabd4b1f86ff74e5a59"></span>bool <code class="sig-name descname">has_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4eevm7Account8has_codeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N4eevm11GlobalStateE">
+<span id="_CPPv3N4eevm11GlobalStateE"></span><span id="_CPPv2N4eevm11GlobalStateE"></span><span id="eevm::GlobalState"></span><span class="target" id="structeevm_1_1GlobalState"></span><em class="property">struct </em><code class="sig-prename descclassname">eevm<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">GlobalState</code><a class="headerlink" href="#_CPPv4N4eevm11GlobalStateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Abstract interface for interacting with EVM world state </p>
+<p>Subclassed by eevm::SimpleGlobalState, <a class="reference internal" href="#classevm4ccf_1_1EthereumState"><span class="std std-ref">evm4ccf::EthereumState</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm11GlobalState6removeERK7Address">
+<span id="_CPPv3N4eevm11GlobalState6removeERK7Address"></span><span id="_CPPv2N4eevm11GlobalState6removeERK7Address"></span><span id="eevm::GlobalState::remove__AddressCR"></span><span class="target" id="structeevm_1_1GlobalState_1a073f34cb5484932b4289d26bdcf3eb86"></span>void <code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="property">const</em> Address &amp;<em>addr</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N4eevm11GlobalState6removeERK7Address" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm11GlobalState3getERK7Address">
+<span id="_CPPv3N4eevm11GlobalState3getERK7Address"></span><span id="_CPPv2N4eevm11GlobalState3getERK7Address"></span><span id="eevm::GlobalState::get__AddressCR"></span><span class="target" id="structeevm_1_1GlobalState_1aa8b4a3ac07ffd06cf96c457599751ff5"></span>AccountState <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="property">const</em> Address &amp;<em>addr</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N4eevm11GlobalState3getERK7Address" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a new zero-initialized account under the given address if none exists </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm11GlobalState6createERK7AddressRK9uint256_tRK4Code">
+<span id="_CPPv3N4eevm11GlobalState6createERK7AddressRK9uint256_tRK4Code"></span><span id="_CPPv2N4eevm11GlobalState6createERK7AddressRK9uint256_tRK4Code"></span><span id="eevm::GlobalState::create__AddressCR.uint256_tCR.CodeCR"></span><span class="target" id="structeevm_1_1GlobalState_1ac7fdd3a8c990f110e3ef42c080de8bd9"></span>AccountState <code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="property">const</em> Address &amp;<em>addr</em>, <em class="property">const</em> uint256_t &amp;<em>balance</em>, <em class="property">const</em> Code &amp;<em>code</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N4eevm11GlobalState6createERK7AddressRK9uint256_tRK4Code" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm11GlobalState17get_current_blockEv">
+<span id="_CPPv3N4eevm11GlobalState17get_current_blockEv"></span><span id="_CPPv2N4eevm11GlobalState17get_current_blockEv"></span><span id="eevm::GlobalState::get_current_block"></span><span class="target" id="structeevm_1_1GlobalState_1afc01980f6a8dcbadc64a095c8534cf0b"></span><em class="property">const</em> Block &amp;<code class="sig-name descname">get_current_block</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N4eevm11GlobalState17get_current_blockEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm11GlobalState14get_block_hashE7uint8_t">
+<span id="_CPPv3N4eevm11GlobalState14get_block_hashE7uint8_t"></span><span id="_CPPv2N4eevm11GlobalState14get_block_hashE7uint8_t"></span><span id="eevm::GlobalState::get_block_hash__uint8_t"></span><span class="target" id="structeevm_1_1GlobalState_1a62867a701a3a82eb42a381e71b1714a4"></span>uint256_t <code class="sig-name descname">get_block_hash</code><span class="sig-paren">(</span>uint8_t <em>offset</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N4eevm11GlobalState14get_block_hashE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N4eevm9ProcessorE">
+<span id="_CPPv3N4eevm9ProcessorE"></span><span id="_CPPv2N4eevm9ProcessorE"></span><span id="eevm::Processor"></span><span class="target" id="classeevm_1_1Processor"></span><em class="property">class </em><code class="sig-prename descclassname">eevm<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">Processor</code><a class="headerlink" href="#_CPPv4N4eevm9ProcessorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Ethereum bytecode processor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm9Processor9ProcessorER11GlobalState">
+<span id="_CPPv3N4eevm9Processor9ProcessorER11GlobalState"></span><span id="_CPPv2N4eevm9Processor9ProcessorER11GlobalState"></span><span id="eevm::Processor::Processor__GlobalStateR"></span><span class="target" id="classeevm_1_1Processor_1a97f02357a8f6668ea51e0ed9f2255b07"></span><code class="sig-name descname">Processor</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4eevm11GlobalStateE" title="eevm::GlobalState">GlobalState</a> &amp;<em>gs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4eevm9Processor9ProcessorER11GlobalState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4eevm9Processor3runER11TransactionRK7Address12AccountStateRKNSt6vectorI7uint8_tEERK9uint256_tP5Trace">
+<span id="_CPPv3N4eevm9Processor3runER11TransactionRK7Address12AccountStateRKNSt6vectorI7uint8_tEERK9uint256_tP5Trace"></span><span id="_CPPv2N4eevm9Processor3runER11TransactionRK7Address12AccountStateRKNSt6vectorI7uint8_tEERK9uint256_tP5Trace"></span><span id="eevm::Processor::run__TransactionR.AddressCR.AccountState.std::vector:uint8_t:CR.uint256_tCR.TraceP"></span><span class="target" id="classeevm_1_1Processor_1abcc312bc78ea61ca68069baca2e73737"></span>ExecResult <code class="sig-name descname">run</code><span class="sig-paren">(</span>Transaction &amp;<em>tx</em>, <em class="property">const</em> Address &amp;<em>caller</em>, AccountState <em>callee</em>, <em class="property">const</em> std::vector&lt;uint8_t&gt; &amp;<em>input</em>, <em class="property">const</em> uint256_t &amp;<em>call_value</em>, Trace *<em>tr</em> = nullptr<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4eevm9Processor3runER11TransactionRK7Address12AccountStateRKNSt6vectorI7uint8_tEERK9uint256_tP5Trace" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The main entry point for the EVM. </p>
+<p>Runs the callee’s code in the caller’s context. VM exceptions (ie, eevm::Exception) will be caught and returned in the result.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>ExecResult the execution result </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tx</span></code>: the transaction </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller</span></code>: the caller’s address </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee</span></code>: the callee’s account state </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code>: the raw byte input </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">call_value</span></code>: the call value </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tr</span></code>: [optional] a pointer to a trace object. If given, a trace of the execution will be collected. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="ethereum-app">
+<h2>Ethereum App<a class="headerlink" href="#ethereum-app" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt id="_CPPv4N7evm4ccf13EthereumStateE">
+<span id="_CPPv3N7evm4ccf13EthereumStateE"></span><span id="_CPPv2N7evm4ccf13EthereumStateE"></span><span id="evm4ccf::EthereumState"></span><span class="target" id="classevm4ccf_1_1EthereumState"></span><em class="property">class </em><code class="sig-prename descclassname">evm4ccf<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">EthereumState</code> : <em class="property">public</em> eevm::<a class="reference internal" href="#_CPPv4N4eevm11GlobalStateE" title="eevm::GlobalState">GlobalState</a><a class="headerlink" href="#_CPPv4N7evm4ccf13EthereumStateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N7evm4ccf13EthereumState3getERKN4eevm7AddressE">
+<span id="_CPPv3N7evm4ccf13EthereumState3getERKN4eevm7AddressE"></span><span id="_CPPv2N7evm4ccf13EthereumState3getERKN4eevm7AddressE"></span><span id="evm4ccf::EthereumState::get__eevm::AddressCR"></span><span class="target" id="classevm4ccf_1_1EthereumState_1a7bc5402fb30c345aa876f760aef7d5dc"></span>eevm::AccountState <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="property">const</em> eevm::Address &amp;<em>address</em><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N7evm4ccf13EthereumState3getERKN4eevm7AddressE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a new zero-initialized account under the given address if none exists </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontendE">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontendE"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontendE"></span><span id="evm4ccf::EVMForCCFFrontend"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend"></span><em class="property">class </em><code class="sig-prename descclassname">evm4ccf<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">EVMForCCFFrontend</code> : <em class="property">public</em> UserRpcFrontend<a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontendE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend17EVMForCCFFrontendER13NetworkTablesR16AbstractNotifier">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend17EVMForCCFFrontendER13NetworkTablesR16AbstractNotifier"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend17EVMForCCFFrontendER13NetworkTablesR16AbstractNotifier"></span><span id="evm4ccf::EVMForCCFFrontend::EVMForCCFFrontend__NetworkTablesR.AbstractNotifierR"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1a74a0907b516ee1b9dfe3fcddb679e0f8"></span><code class="sig-name descname">EVMForCCFFrontend</code><span class="sig-paren">(</span>NetworkTables &amp;<em>nwt</em>, AbstractNotifier &amp;<em>notifier</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend17EVMForCCFFrontendER13NetworkTablesR16AbstractNotifier" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend10make_stateERN5Store2TxE">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend10make_stateERN5Store2TxE"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend10make_stateERN5Store2TxE"></span><span id="evm4ccf::EVMForCCFFrontend::make_state__Store::TxR"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1ad9c24903a6e57e7cf193c9472821f67b"></span><a class="reference internal" href="#_CPPv4N7evm4ccf13EthereumStateE" title="evm4ccf::EthereumState">EthereumState</a> <code class="sig-name descname">make_state</code><span class="sig-paren">(</span>Store::Tx &amp;<em>tx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend10make_stateERN5Store2TxE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend21install_standard_rpcsEv">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend21install_standard_rpcsEv"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend21install_standard_rpcsEv"></span><span id="evm4ccf::EVMForCCFFrontend::install_standard_rpcs"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1aeef2d4ae53a9ab61cbab51eb181733c6"></span>void <code class="sig-name descname">install_standard_rpcs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend21install_standard_rpcsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend19execute_transactionE8CallerIdRKN9rpcparams11MessageCallERN5Store2TxE">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend19execute_transactionE8CallerIdRKN9rpcparams11MessageCallERN5Store2TxE"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend19execute_transactionE8CallerIdRKN9rpcparams11MessageCallERN5Store2TxE"></span><span id="evm4ccf::EVMForCCFFrontend::execute_transaction__CallerId.rpcparams::MessageCallCR.Store::TxR"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1abc60a9474e6ee9ac704aeb1f321becb2"></span>pair&lt;bool, nlohmann::json&gt; <code class="sig-name descname">execute_transaction</code><span class="sig-paren">(</span>CallerId <em>caller_id</em>, <em class="property">const</em> rpcparams::MessageCall &amp;<em>call_data</em>, Store::Tx &amp;<em>tx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend19execute_transactionE8CallerIdRKN9rpcparams11MessageCallERN5Store2TxE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend8accountsE">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend8accountsE"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend8accountsE"></span><span id="evm4ccf::EVMForCCFFrontend::accounts__tables::Accounts"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1ac588af740d4ae481d990a6dc02dc7b69"></span>tables::Accounts <code class="sig-name descname">accounts</code><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend8accountsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend7storageE">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend7storageE"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend7storageE"></span><span id="evm4ccf::EVMForCCFFrontend::storage__tables::StorageR"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1a71bae877df038eb706aa7081a81f2f30"></span>tables::Storage &amp;<code class="sig-name descname">storage</code><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend7storageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend10tx_resultsE">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend10tx_resultsE"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend10tx_resultsE"></span><span id="evm4ccf::EVMForCCFFrontend::tx_results__tables::ResultsR"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1a56b56377869f8a4f5c37dcca6268d7a8"></span>tables::Results &amp;<code class="sig-name descname">tx_results</code><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend10tx_resultsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend10run_in_evmERKN9rpcparams11MessageCallER13EthereumStateR10LogHandler">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend10run_in_evmERKN9rpcparams11MessageCallER13EthereumStateR10LogHandler"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend10run_in_evmERKN9rpcparams11MessageCallER13EthereumStateR10LogHandler"></span><span id="evm4ccf::EVMForCCFFrontend::run_in_evm__rpcparams::MessageCallCR.EthereumStateR.LogHandlerR"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1a04b1ddd0b90ba7950b76b633ca607c14"></span>std::pair&lt;ExecResult, AccountState&gt; <code class="sig-name descname">run_in_evm</code><span class="sig-paren">(</span><em class="property">const</em> rpcparams::MessageCall &amp;<em>call_data</em>, <a class="reference internal" href="#_CPPv4N7evm4ccf13EthereumStateE" title="evm4ccf::EthereumState">EthereumState</a> &amp;<em>es</em>, LogHandler &amp;<em>log_handler</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend10run_in_evmERKN9rpcparams11MessageCallER13EthereumStateR10LogHandler" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend10run_in_evmERKN9rpcparams11MessageCallER13EthereumState">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend10run_in_evmERKN9rpcparams11MessageCallER13EthereumState"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend10run_in_evmERKN9rpcparams11MessageCallER13EthereumState"></span><span id="evm4ccf::EVMForCCFFrontend::run_in_evm__rpcparams::MessageCallCR.EthereumStateR"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1a62d0d94d92814e7b025d082957dd92f5"></span>pair&lt;ExecResult, AccountState&gt; <code class="sig-name descname">run_in_evm</code><span class="sig-paren">(</span><em class="property">const</em> rpcparams::MessageCall &amp;<em>call_data</em>, <a class="reference internal" href="#_CPPv4N7evm4ccf13EthereumStateE" title="evm4ccf::EthereumState">EthereumState</a> &amp;<em>es</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend10run_in_evmERKN9rpcparams11MessageCallER13EthereumState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7evm4ccf17EVMForCCFFrontend19execute_transactionERKN9rpcparams11MessageCallER13EthereumStateR10LogHandler">
+<span id="_CPPv3N7evm4ccf17EVMForCCFFrontend19execute_transactionERKN9rpcparams11MessageCallER13EthereumStateR10LogHandler"></span><span id="_CPPv2N7evm4ccf17EVMForCCFFrontend19execute_transactionERKN9rpcparams11MessageCallER13EthereumStateR10LogHandler"></span><span id="evm4ccf::EVMForCCFFrontend::execute_transaction__rpcparams::MessageCallCR.EthereumStateR.LogHandlerR"></span><span class="target" id="classevm4ccf_1_1EVMForCCFFrontend_1a495f36d76ec0c23667ba69a6e27416c4"></span>std::tuple&lt;ExecResult, TxHash, Address&gt; <code class="sig-name descname">execute_transaction</code><span class="sig-paren">(</span><em class="property">const</em> rpcparams::MessageCall &amp;<em>call_data</em>, <a class="reference internal" href="#_CPPv4N7evm4ccf13EthereumStateE" title="evm4ccf::EthereumState">EthereumState</a> &amp;<em>es</em>, LogHandler &amp;<em>log_handler</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7evm4ccf17EVMForCCFFrontend19execute_transactionERKN9rpcparams11MessageCallER13EthereumStateR10LogHandler" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="demos.html" class="btn btn-neutral float-left" title="Demos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Microsoft Corporation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
